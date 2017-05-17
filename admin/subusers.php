@@ -21,9 +21,6 @@ if(GPXDEBUG)
 ?>
 <div class="infobox" style="display:none;"></div>
 <style media="screen">
-html{
-  background-color: #3e3e3e;
-}
 .container {
 position: absolute;
 top: 50%;
