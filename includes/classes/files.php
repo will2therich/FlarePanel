@@ -15,8 +15,8 @@ class Files
         // Otherwise we were given a gameserver ID, get it's network id
         else
         {
-            $result_nid = @mysql_query("SELECT netid FROM servers WHERE id = '$srvid' LIMIT 1");
-            $row_nid    = mysql_fetch_row($result_nid);
+            $result_nid = $GLOBALS['mysqli']->query("SELECT netid FROM servers WHERE id = '$srvid' LIMIT 1");
+            $row_nid    = $result_nid->fetch_row();
             $this_netid = $row_nid[0];
         }
         
@@ -64,7 +64,7 @@ class Files
             if($tpl_browse) $game_dir = $local_dir;
             
             // Use Gameserver Directory
-            else $game_dir = $local_dir.'/accounts/'.$net_gameuser.'/'.$net_game_ip.':'.$net_game_port;
+            else $game_dir = $local_dir.'/accounts/'.$net_gameuser.'/'.$net_game_ip.'.'.$net_game_port;
             
             // Append new directory to basedir
             if($dir) $game_dir .= '/' . $dir;
@@ -206,8 +206,8 @@ class Files
         if(preg_match('/(^\.+)/', $name)) return 'ERROR: Invalid filename given';
         
         // Get network ID
-        $result_nid = @mysql_query("SELECT netid FROM servers WHERE id = '$srvid'");
-        $row_nid    = mysql_fetch_row($result_nid);
+        $result_nid = $GLOBALS['mysqli']->query("SELECT netid FROM servers WHERE id = '$srvid'");
+        $row_nid    = $result_nid->fetch_row();
         $this_netid = $row_nid[0];
         
         if(empty($this_netid)) return 'Failed to get network ID!';
@@ -234,7 +234,7 @@ class Files
         if($net_local)
         {
             $home_dir   = DOCROOT . '/_SERVERS/';
-            $file_path  = "$home_dir/accounts/$net_gameuser/$net_game_ip:$net_game_port";
+            $file_path  = "$home_dir/accounts/$net_gameuser/$net_game_ip.$net_game_port";
             
             if(!empty($_SESSION['curdir'])) $file_path .= '/' . $_SESSION['curdir'] . '/' . $name;
             else $file_path .= '/' . $name;
@@ -252,7 +252,7 @@ class Files
             $sso_gamedir  = $sso_info['game_path'];
                 
             // Use full path
-            $file_path  = $sso_info['game_path']; #"$home_dir/accounts/$net_gameuser/$net_game_ip\:$net_game_port";
+            $file_path  = $sso_info['game_path']; #"$home_dir/accounts/$net_gameuser/$net_game_ip\.$net_game_port";
             if(!empty($_SESSION['curdir'])) $file_path .= '/' . $_SESSION['curdir'] . '/' . $name;
             else $file_path .= '/' . $name;
             
@@ -281,8 +281,8 @@ class Files
         if(preg_match('/(^\.+)/', $name)) return 'ERROR: Invalid directory given';
         
         // Get network ID
-        $result_nid = @mysql_query("SELECT netid FROM servers WHERE id = '$srvid'");
-        $row_nid    = mysql_fetch_row($result_nid);
+        $result_nid = $GLOBALS['mysqli']->query("SELECT netid FROM servers WHERE id = '$srvid'");
+        $row_nid    = $result_nid->fetch_row();
         $this_netid = $row_nid[0];
         
         if(empty($this_netid)) return 'Failed to get network ID!';
@@ -309,7 +309,7 @@ class Files
         if($net_local)
         {
             $home_dir   = DOCROOT . '/_SERVERS/';
-            $file_path  = "$home_dir/accounts/$net_gameuser/$net_game_ip:$net_game_port";
+            $file_path  = "$home_dir/accounts/$net_gameuser/$net_game_ip.$net_game_port";
             
             #if(!empty($_SESSION['curdir'])) $file_path .= '/' . $_SESSION['curdir'] . '/' . $name;
             #else $file_path .= '/' . $name;
@@ -324,7 +324,7 @@ class Files
             #$home_dir = $netinfo['ssh_homedir'];
             
             // Use full path
-            #$file_path  = "$home_dir/accounts/$net_gameuser/$net_game_ip\:$net_game_port";
+            #$file_path  = "$home_dir/accounts/$net_gameuser/$net_game_ip\.$net_game_port";
             
             // Get SSO info
             $sso_info = $Network->sso_info($srvid);
@@ -355,8 +355,8 @@ class Files
         if(empty($file)) return 'No filename given!';
         
         // Get network ID
-        $result_nid = @mysql_query("SELECT netid FROM servers WHERE id = '$srvid'");
-        $row_nid    = mysql_fetch_row($result_nid);
+        $result_nid = $GLOBALS['mysqli']->query("SELECT netid FROM servers WHERE id = '$srvid'");
+        $row_nid    = $result_nid->fetch_row();
         $this_netid = $row_nid[0];
         
         if(empty($this_netid)) return 'Failed to get network ID!';
@@ -383,7 +383,7 @@ class Files
         if($net_local)
         {
             $localdir   = DOCROOT . '/_SERVERS/';
-            $game_dir = $localdir . '/accounts/'.$net_gameuser.'/'.$net_game_ip.':'.$net_game_port . '/' . $file;
+            $game_dir = $localdir . '/accounts/'.$net_gameuser.'/'.$net_game_ip.'.'.$net_game_port . '/' . $file;
             
             // Stupid newlines, this took forever to figure out '\\\n'
             $content  = preg_replace('/\\\n/', "\n", $content);
@@ -402,7 +402,7 @@ class Files
         else
         {
             // Get SSO info
-            #$file_path  = $netinfo['ssh_homedir'] . "/accounts/$net_gameuser/$net_game_ip\:$net_game_port/$file";
+            #$file_path  = $netinfo['ssh_homedir'] . "/accounts/$net_gameuser/$net_game_ip\.$net_game_port/$file";
             $sso_info   = $Network->sso_info($srvid);
             $sso_user   = $sso_info['username'];
             $file_path  = $sso_info['game_path'].'/'.$file;
@@ -422,8 +422,8 @@ class Files
         if(empty($file)) return 'No filename given!';
         
         // Get network ID
-        $result_nid = @mysql_query("SELECT netid FROM servers WHERE id = '$srvid'");
-        $row_nid    = mysql_fetch_row($result_nid);
+        $result_nid = $GLOBALS['mysqli']->query("SELECT netid FROM servers WHERE id = '$srvid'");
+        $row_nid    = $result_nid->fetch_row();
         $this_netid = $row_nid[0];
         
         if(empty($this_netid)) return 'Failed to get network ID!';
@@ -454,7 +454,7 @@ class Files
         if($net_local)
         {
             $localdir   = DOCROOT . '/_SERVERS/';
-            $game_dir   = $localdir . '/accounts/'.$net_gameuser.'/'.$net_game_ip.':'.$net_game_port . '/' . $file;
+            $game_dir   = $localdir . '/accounts/'.$net_gameuser.'/'.$net_game_ip.'.'.$net_game_port . '/' . $file;
             
             // Stupid newlines, this took forever to figure out '\\\n/' - either jquery caused this or the textarea did, no idea
             $content  = preg_replace('/\\\n/', "\n", $content);
@@ -469,7 +469,7 @@ class Files
         }
         else
         {
-            #$file_path  = $netinfo['ssh_homedir'] . "/accounts/$net_gameuser/$net_game_ip\:$net_game_port/$file";
+            #$file_path  = $netinfo['ssh_homedir'] . "/accounts/$net_gameuser/$net_game_ip\.$net_game_port/$file";
 
             // Get SSO info
             $sso_info = $Network->sso_info($srvid);
@@ -492,8 +492,8 @@ class Files
         if(empty($dir_name)) return 'No directory name given!';
         
         // Get network ID
-        $result_nid = @mysql_query("SELECT netid FROM servers WHERE id = '$srvid'");
-        $row_nid    = mysql_fetch_row($result_nid);
+        $result_nid = $GLOBALS['mysqli']->query("SELECT netid FROM servers WHERE id = '$srvid'");
+        $row_nid    = $result_nid->fetch_row();
         $this_netid = $row_nid[0];
         
         if(empty($this_netid)) return 'Failed to get network ID!';
@@ -520,7 +520,7 @@ class Files
         if($net_local)
         {
             $localdir   = DOCROOT . '/_SERVERS/';
-            $game_dir   = $localdir . '/accounts/'.$net_gameuser.'/'.$net_game_ip.':'.$net_game_port . '/' . $dir_name;
+            $game_dir   = $localdir . '/accounts/'.$net_gameuser.'/'.$net_game_ip.'.'.$net_game_port . '/' . $dir_name;
             
             // Check existing
             if(file_exists($game_dir)) die('Sorry, that directory already exists!');

@@ -87,7 +87,6 @@ if($new_dir == '.')
 $file_list  = $Files->file_list($url_id,$new_dir,$tpl_brws);
 
 if(GPXDEBUG && !is_array($file_list)) echo 'DEBUG: '.$file_list.'<br />';
-
 if(GPXDEBUG)
 {
     echo 'DEBUG: Dumping file list ...<br />';
