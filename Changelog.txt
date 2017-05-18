@@ -20,3 +20,10 @@ Added a Ajax call to update subusers;
 Added a new Ajax call for additional pages.
 Wording Changes;
 
+Changes made 18/05/17 - For Testing:
+Updated Login Scrips to use:
+SHA-256 hashing,
+Random Personal Salt Keys,
+Site Wide Salt Keys.
+Changed login Directories
+
