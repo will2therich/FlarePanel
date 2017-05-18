@@ -4,16 +4,14 @@ session_start();
 // Check already logged-in
 if(isset($_SESSION['gpx_userid']))
 {
-    header('Location: index.php');
+    header('Location: ../../index.php');
     exit(0);
 }
 
-if(!file_exists('configuration.php')) die('Currently down for maintenance.  Please try again soon.');
 
-require('configuration.php');
 
 // Get system settings
-require('includes/classes/core.php');
+require('../../includes/classes/core.php');
 $Core = new Core;
 $Core->dbconnect();
 $settings = $Core->getsettings();
@@ -22,11 +20,10 @@ $cfg_lang       = $settings['language'];
 $cfg_company    = $settings['company'];
 
 // Set default language
-if(!empty($cfg_lang)) require('languages/'.$cfg_lang.'.php');
-else require('languages/english.php');
+if(!empty($cfg_lang)) require('../../languages/'.$cfg_lang.'.php');
+else require('../../languages/english.php');
 
 // Check Install
-if(file_exists('install')) die('Currently down for maintenance.  Please try again soon.');
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,15 +31,15 @@ if(file_exists('install')) die('Currently down for maintenance.  Please try agai
 <title><?php if(!empty($cfg_company)) echo $cfg_company . ' | '.$lang['game_panel']; else echo $lang['game_panel']; ?></title>
 <?php
 // Use default system theme
-if(!empty($cfg_theme)) echo '<link rel="stylesheet" type="text/css" href="themes/'.$cfg_theme.'/index.css" />';
-else echo '<link rel="stylesheet" type="text/css" href="themes/default/index.css" />';
+if(!empty($cfg_theme)) echo '<link rel="stylesheet" type="text/css" href="../../themes/'.$cfg_theme.'/index.css" />';
+else echo '<link rel="stylesheet" type="text/css" href="../../themes/default/index.css" />';
 ?>
-<script type="text/javascript" src="scripts/jquery.min.js"></script>
-<script type="text/javascript">var ajaxURL='ajax/ajax.php';</script>
-<script src="http://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
+<!-- <script type="text/javascript">var ajaxURL='ajax/ajax.php';</script>
 <script type="text/javascript" src="scripts/gpx.js"></script>
 <script type="text/javascript" src="scripts/base64.js"></script>
-<script type="text/javascript" src="scripts/internal/login.js"></script>
+<script type="text/javascript" src="scripts/internal/login.js"></script> -->
+<script src="http://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
+<script type="text/javascript" src="../../scripts/jquery.min.js"></script>
 </head>
 
 <body>
@@ -95,7 +92,6 @@ $(document).ready(function(){
 
       </div>
       <div class="footer"><a href="mailto:will@flareservers.co.uk?subject=Password%20Forgotton%FlarePanel">Forgot your password?</a></div>
-    </form>
   </div>
 </div>
 
@@ -723,8 +719,85 @@ var banner = new Banner();
 banner.initialize("canvas");
 </script>
 
+<?php
+session_start();
+//require('../configuration.php'); // No direct access
+$conn = mysqli_connect("localhost","root","flareservers","gamepaneltest");
+if($_SESSION['user']!=''){header("Location:home.php");}
+include("config.php");
+$email=$_POST['mail'];
+$password=$_POST['pass'];
 
 
+
+
+if(isset($_POST) && $email!='' && $password!=''){
+  $updatedcheck = mysqli_query($conn,"SELECT
+    setpass_3010
+    FROM admins
+    WHERE `username` = '$email'
+    ") or die ("Unable To Check Login Try Again Later");
+    $updatedpass = $updatedcheck->fetch_array();
+    echo  '<h1>'.$updatedpass.'<h1>';
+    $updated = $updatedpass['setpass_3010'];
+    echo  $updated;
+
+    if (isset($_POST) && $updated == 0) {
+      $url_pass_oldstyle	= md5($password);
+      $url_pass_enc	      = base64_encode(sha1('ZzaX'.$password.'GPX88'));
+      $sql_checkpass      = "AND (`password` = '$url_pass_enc' OR `password` = '$url_pass_oldstyle')";
+      $result_login = mysqli_query($conn, "SELECT id,setpass_3010,theme,language,email_address,first_name FROM admins WHERE username = '$email' $sql_checkpass ORDER BY id ASC LIMIT 1") or die('Failed to check login');
+      $totals       = $result_login->num_rows;
+      if($totals == 0) die('INVALID LOGIN');
+      echo "Logged in";
+      function rand_string($length) {
+        $str="";
+        $chars = "subinsblogabcdefghijklmanopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $size = strlen($chars);
+        for($i = 0;$i < $length;$i++) {
+          $str .= $chars[rand(0,$size-1)];
+        }
+        return $str; /* http://subinsb.com/php-generate-random-string */
+      }
+      echo "Updating Password to new measures";
+      $site_salt="subinsblogsalt"; /*Common Salt used for password storing on site. You can't change it. If you want to change it, change it when you register a user.*/
+      $p_salt = rand_string(20);
+      $upd_pass = hash('sha256',$password.$site_salt.$p_salt);
+      mysqli_query($conn, "UPDATE admins SET `setpass_3010` = '1',`password` = '$upd_pass',`psalt` = '$p_salt' WHERE username = '$email'") or die('Failed to update password security: '.$GLOBALS['mysqli']->error);
+      echo "<h2>For Security reasons your password has been updated please try again.</h2>";
+    }
+ $sql=$dbh->prepare("SELECT * FROM admins WHERE username='$email'");
+ $sql->execute(array($email));
+ while($r=$sql->fetch()){
+  $p=$r['password'];
+  $p_salt=$r['psalt'];
+  $id=$r['id'];
+  $lang=$r['language'];
+  $usrname=$r['username'];
+  $email=$r['email_address'];
+  $firstname =$r['first_name'];
+
+ }
+ $site_salt="subinsblogsalt"; /*Common Salt used for password storing on site. You can't change it. If you want to change it, change it when you register a user.*/
+ $salted_hash = hash('sha256',$password.$site_salt.$p_salt);
+ if($p==$salted_hash){
+   // Check login
+       // Store in session
+       $_SESSION['gpx_userid']   = $id;
+       $_SESSION['gpx_lang']     = $lang;
+       $_SESSION['gpx_username'] = $usrname;
+       $_SESSION['gpx_email']    = $email;
+       $_SESSION['gpx_fname']    = $firstname;
+       $_SESSION['gpx_type']     = 'admin';
+       $_SESSION['gpx_admin']    = '1';
+       $_SESSION['user']=$id;
+  header("Location:../../admin/index.php");
+ }else{
+  echo "<h2>Username/Password is Incorrect.</h2>";
+ }
+}
+?>
+</form>
 </div>
 </body>
 </html>

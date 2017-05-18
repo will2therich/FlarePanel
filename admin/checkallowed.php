@@ -7,11 +7,10 @@ if(!defined('DOCROOT'))
     if(file_exists('../configuration.php')) require('../configuration.php');
     else die('No /configuration.php file found!  Check your installation and try again.');
 }
-
 // Check if this user is logged in as an admin
 if(!isset($_SESSION['gpx_userid']))
 {
-    header('Location: login.php?try=1');
+    header('Location: ../Login/Admin/index.php');
     exit(0);
 }
 
