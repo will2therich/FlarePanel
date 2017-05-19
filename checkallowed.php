@@ -4,7 +4,7 @@ session_start();
 // Check if this user is logged in
 if(!isset($_SESSION['gpx_userid']))
 {
-    header('Location: /Login/User/index.php');
+    header('Location: ./Login/User/index.php');
     exit(0);
 }
 $gpx_userid = $_SESSION['gpx_userid'];

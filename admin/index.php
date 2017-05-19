@@ -167,7 +167,7 @@ $(document).ready(function(){
     <li><a href="#!"><?php echo $_SESSION['gpx_username']; ?></a>
     <ul class="nav-dropdown">
       <li onClick="javascript:mainpage('settings','');"><a href="#!"><img src="../images/icons/medium/edit.png" width="18" height="18" />My Settings</a></li>
-      <li><a href="/logout.php"><img src="../images/icons/medium/accounts.png" width="18" height="18" />Logout</a></li>
+      <li><a href="./logout.php"><img src="../images/icons/medium/accounts.png" width="18" height="18" />Logout</a></li>
     </ul></li>
   </ul>
 
