@@ -128,7 +128,9 @@ $(document).ready(function(){
     <div class="brand">
       <a href="#!"><img style="margin-left: -450px;margin-top: 12px;" src="../images/logo.png" border="0" /></a>
     </div>
-<nav>
+<nav style="
+    width: 112%;
+">
   <div class="nav-mobile">
     <a id="nav-toggle" href="#!"><span></span></a>
   </div>
@@ -140,7 +142,6 @@ $(document).ready(function(){
         <li  onClick="javascript:mainpage('games','');"><a style="margin-right: -52px;" href="#!"><img src="../images/icons/medium/template.png" width="18" height="18" /><?php echo $lang['game_setups']; ?></a></li>
         <li  onClick="javascript:mainpage('cloudgames','');"><a style="margin-right: -52px;" href="#!"><img src="../images/icons/medium/cloud.png" width="18" height="18" /><?php echo $lang['cloud_games']; ?></a></li>
         <li  onClick="javascript:mainpage('plugins','');"><a style="margin-right: -52px;" href="#!"><img src="../images/icons/medium/plugins.png" width="18" height="18" /><?php echo $lang['plugins']; ?></a></li>
-
       </ul>
     </li>
     <li><a href="#!">Server Settings/Options</a>
@@ -157,12 +158,16 @@ $(document).ready(function(){
       <li onClick="javascript:user_show_create();"><a href="#!"><img src="../images/icons/medium/accounts.png" width="18" height="18" /><?php echo $lang['add_user']; ?></a></li>
       <li onClick="javascript:mainpage('admins','');"><a href="#!"><img src="../images/icons/medium/accounts.png" width="18" height="18" /><?php echo $lang['list_admins']; ?></a></li>
       <li onClick="javascript:admin_show_create();"><a href="#!"><img src="../images/icons/medium/accounts.png" width="18" height="18" /><?php echo $lang['add_admin']; ?></a></li>
-
+      <li onClick="javascript:mainpage('subusers','');"><a href="#!"><img src="../images/icons/medium/accounts.png" width="18" height="18" /><?php echo $lang['add_admin']; ?></a></li>
     </ul></li>
     <li><a href="#!">Network Settings</a>
     <ul class="nav-dropdown">
       <li onClick="javascript:mainpage('network','');"><a href="#!"><img src="../images/icons/medium/network.png" width="18" height="18" /><?php echo $lang['all_servers']; ?></a></li>
       <li onClick="javascript:mainpage('networkadd','');"><a href="#!"><img src="../images/icons/medium/network.png" width="18" height="18" /><?php echo $lang['create_network']; ?></a></li>
+    </ul></li>
+    <li><a href="#!">Site Settings</a>
+    <ul class="nav-dropdown">
+      <li onClick="javascript:mainpage('sitesettings','');"><a href="#!"><img src="../images/icons/medium/template.png" width="18" height="18" /><?php echo 'Global Settings' ?></a></li>
     </ul></li>
     <li><a href="#!"><?php echo $_SESSION['gpx_username']; ?></a>
     <ul class="nav-dropdown">
