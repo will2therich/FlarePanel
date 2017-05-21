@@ -10,15 +10,20 @@ if(isset($_SESSION['gpx_userid']))
 
 
 
-// Get system settings
-require('../../includes/classes/core.php');
+
+
 $Core = new Core;
 $Core->dbconnect();
 $settings = $Core->getsettings();
 $cfg_theme      = $settings['theme'];
 $cfg_lang       = $settings['language'];
 $cfg_company    = $settings['company'];
-
+// Get system settings
+require('../../includes/classes/core.php');
+$maint = $settings['maint_mode'];
+if ($maint == 1) {
+  header('Location: ./Maint.php');
+}
 // Set default language
 if(!empty($cfg_lang)) require('../../languages/'.$cfg_lang.'.php');
 else require('../../languages/english.php');
