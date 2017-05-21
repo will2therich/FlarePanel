@@ -11,6 +11,7 @@ if(isset($_SESSION['gpx_userid']))
 // if(!file_exists('../../configuration.php')) die('Currently down for maintenance.  Please try again soon.');
 
 require('../../configuration.php');
+require('../../MailSettings.php');
 
 // Get system settings
 require('../../includes/classes/core.php');
@@ -41,177 +42,135 @@ else echo '<link rel="stylesheet" type="text/css" href="../../themes/default/ind
 <script type="text/javascript" src="scripts/gpx.js"></script>
 <script type="text/javascript" src="scripts/base64.js"></script>
 <script type="text/javascript" src="scripts/internal/login.js"></script> -->
-<script src="http://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
+<script src="https://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
 <script type="text/javascript" src="../../scripts/jquery.min.js"></script>
 </head>
 
 <body>
 <div class="header-11">
 <!-- <img src="https://wallpaperscraft.com/image/mountains_beautiful_sky_blurred_87742_1920x1080.jpg" alt=""> -->
-<canvas id='canvas'></canvas>
+
 <div id="panel_top_client">The FlarePanel!</div>
 
 <div class="container">
-  <div class="card" style="border: none;background: none;box-shadow: none;">
-    <div class="infobox" style="width:478px; !important;"></div>
+  <div class="card" style="border: none;background: none;box-shadow: none;margin-top: 100px;">
 
   </div>
   <div class="card">
-    <h1 class="title">Login</h1>
-    <form method="POST" action="index.php">
+    <h1 class="title">Reset Password</h1>
+    <form method="POST" action="reset.php">
       <div class="input-container">
         <input type="text" class="inputs" id="login_user" name="mail" style="
           margin-top: 16px;
           " />
-        <label for="login_user">Username</label>
+        <label for="login_user">Email</label>
         <div class="bar"></div>
       </div>
-      <div class="input-container">
-        <input type="password" name="pass" class="inputs" id="login_pass" style="
-          margin-top: 16px;
-          "/>
-        <label for="login_pass">Password</label>
-        <div class="bar"></div>
-      </div>
+      <div class="footer"><a href="./index.php">Go back to login page</a></div>
       <div class="button-container">
-
       </div>
-      <div class="footer"><a href="./reset.php">Forgot your password?</a></div>
   </div>
 </div>
 
 <div align="center">
     <div id="login_box" style="margin-top: -77px;height:10px !important;">
-        <input type="submit" name="Submit" class="button" id="" value="<?php echo $lang['login']; ?>"  />
+        <input type="submit" name="Submit" value="Change Password">
     </div>
 </div>
-
-
 <?php
-session_start();
-//require('../configuration.php'); // No direct access
-$conn = mysqli_connect("localhost","root","flareservers","gamepaneltest");
-if($_SESSION['user']!=''){header("Location:home.php");}
-include("../../configuration.php");
-include("config.php");
-$email=$_POST['mail'];
-$password=$_POST['pass'];
-if(isset($_POST) && $email!='' && $password!=''){
-  $updatedcheck = mysqli_query($conn,"SELECT
-    setpass_3010
-    FROM users
-    WHERE `username` = '$email'
-    ") or die ("Unable To Check Login Try Again Later");
-    $updatedpass = $updatedcheck->fetch_array();
-  //  echo  '<h1>'.$updatedpass.'<h1>';
-    $updated = $updatedpass['setpass_3010'];
-  //  echo  $updated;
-    $enc_key = $settings['enc_key'];
-    if ($updated == 0) {
-      echo "UPDATING";
-      //$url_pass_oldstyle	= md5($password);
-      $result_login = mysqli_query($conn, "SELECT
-                                    id,
-                                    perm_ftp,
-                                    perm_files,
-                                    perm_startup,
-                                    perm_startup_see,
-                                    perm_chpass,
-                                    perm_updetails,
-                                    theme,
-                                    language,
-                                    email_address,
-                                    first_name
-                                  FROM users
-                                  WHERE
-                                    `username` = '$email'
-                                    AND AES_DECRYPT(sso_pass, '$enc_key') = '$password'
-                                    AND `deleted` = '0'
-                                  ORDER BY id ASC
-                                  LIMIT 1") or die('Sorry, we were unable to check your login.  Please try again soon.');
-      $totals = $result_login->num_rows;
-      if($totals == 0) die('INVALID LOGIN');
-      echo "Logged in";
-      function rand_string($length) {
-        $str="";
-        $chars = "subinsblogabcdefghijklmanopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        $size = strlen($chars);
-        for($i = 0;$i < $length;$i++) {
-          $str .= $chars[rand(0,$size-1)];
-        }
-        return $str; /* http://subinsb.com/php-generate-random-string */
-      }
-      echo "Updating Password to new measures";
-      $site_salt="subinsblogsalt"; /*Common Salt used for password storing on site. You can't change it. If you want to change it, change it when you register a user.*/
-      $p_salt = rand_string(20);
-      $upd_pass = hash('sha256',$password.$site_salt.$p_salt);
-      mysqli_query($conn, "UPDATE users SET `setpass_3010` = '1',`password` = '$upd_pass',`p_salt` = '$p_salt' WHERE username = '$email' ") or die('Failed to update password security: '.$GLOBALS['mysqli']->error);
-      echo "<h2>For Security reasons your password has been updated please try again.</h2>";
-    }
-elseif ($updated != 0){
- $sql=$dbh->prepare("SELECT * FROM users WHERE username='$email'");
- $sql->execute(array($email));
- while($r=$sql->fetch()){
-  $p=$r['password'];
-  $p_salt=$r['p_salt'];
-  $id=$r['id'];
-  $lang=$r['language'];
-  $usrname=$r['username'];
-  $email2=$r['email_address'];
-  $firstname =$r['first_name'];
-  $prmftp =$r['perm_ftp'];
-  $prmfiles =$r['perm_files'];
-  $prmstart =$r['perm_startup'];
-  $prmstartsee =$r['perm_startup_see'];
-  $prmchpass =$r['perm_chpass'];
-  $prmchupdetails =$r['perm_updetails'];
- }
- $site_salt="subinsblogsalt"; /*Common Salt used for password storing on site. You can't change it. If you want to change it, change it when you register a user.*/
- $salted_hash = hash('sha256',$password.$site_salt.$p_salt);
- $login_attemps =  mysqli_query($conn, "SELECT
-   login_attempts
-   FROM users
-   WHERE`username` = '$email'
-   ") or die ("Unable To Check Login Attempts Try Again Later");
-   $LoginAttempt = $login_attemps->fetch_array();
-   $currentattempt = $LoginAttempt['login_attempts'];
- if($p!=$salted_hash){
-     //echo $currentattempt;
-     if($currentattempt > 4){
-       echo('Your Account Has Been Locked. To unlock this please contact us');
-     }else{
-       echo('Login Failed - Check Your Details And Try Again');
-       mysqli_query($conn, "UPDATE users SET login_attempts = login_attempts + 1 WHERE username = '$email' ");
-     }
- }
- elseif($p==$salted_hash){
-   // Check login
-   if($currentattempt == 5) exit("Your Account Has Been Locked. To unlock this please contact us");
-   mysqli_query($conn, "UPDATE users SET login_attempts = 0 WHERE username = '$email' ");
+include('../../configuration.php');
+$servername = $settings['db_host'] ;
+$username = $settings['db_username'];
+$password = $settings['db_password'];
+$dbname = $settings['db_name'];
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-       // Store in session
-       $_SESSION['gpx_userid']   = $id;
-       $_SESSION['gpx_lang']     = $lang;
-       $_SESSION['gpx_username'] = $usrname;
-       $_SESSION['gpx_email']    = $email2;
-       $_SESSION['gpx_fname']    = $firstname;
-       $_SESSION['gpx_type']     = 'user';
-       $perms_arr['perm_ftp']         = $prmftp;
-      $perms_arr['perm_files']        = $prmfiles;
-      $perms_arr['perm_startup']      = $prmstart;
-      $perms_arr['perm_startup_see']  = $prmstartsee;
-      $perms_arr['perm_chpass']       = $prmchpass;
-      $perms_arr['perm_updetails']    = $prmchupdetails;
-  $_SESSION['gpx_perms']  = $perms_arr;
-  header("Location:../../index.php");
-}
-  else
-  {
-    echo "<h2>Username/Password is Incorrect.</h2>";
+$email=$_POST['mail'];
+// echo $email;
+
+if($email=='') {
+  // /echo 'Username Not Entered';
+} else {
+
+
+//echo $email;
+
+
+function rand_string($length) {
+  $str="";
+  $chars = "subinsblogabcdefghijklmanopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  $size = strlen($chars);
+  for($i = 0;$i < $length;$i++) {
+    $str .= $chars[rand(0,$size-1)];
   }
+  return $str; /* http://subinsb.com/php-generate-random-string */
 }
+
+$site_salt="subinsblogsalt"; /*Common Salt used for password storing on site. You can't change it. If you want to change it, change it when you register a user.*/
+$p_salt = rand_string(20);
+$password = rand_string(20);
+$upd_pass = hash('sha256',$password.$site_salt.$p_salt);
+
+mysqli_query($conn, "UPDATE users SET `setpass_3010` = '1',`password` = '$upd_pass',`p_salt` = '$p_salt' WHERE email_address = '$email' ") or die('No User Exists with this email '.$GLOBALS['mysqli']->error);
+
+$to  = $email_address;
+require '../../PHPMailer/PHPMailerAutoload.php';
+
+$mail = new PHPMailer;
+$mail->isSMTP();                                      // Set mailer to use SMTP
+$mail->Host = $settings['SMTP_Host'];  // Specify main and backup SMTP servers
+$mail->SMTPAuth = true;                               // Enable SMTP authentication
+$mail->Port       = $settings['SMTP_port'];
+$mail->Username = $settings['SMTP_username'];                 // SMTP username
+$mail->Password = $settings['SMTP_password'];                           // SMTP password
+$mail->SMTPSecure = 'tls';                            // Enable encryption, 'ssl' also accepted
+$mail->From = 'no-reply@flareservers.co.uk';
+$mail->FromName = 'FlarePanel';
+// $mail->addAddress("test@flareservers.co.uk", "FlarePanel User");     // Add a recipient
+$mail->addAddress("".$email."", "FlarePanel User");
+//echo "".$email."";    // Add a recipient
+$mail->addReplyTo('support@flareservers.co.uk', 'FlareServers');
+$mail->WordWrap = 50;                                 // Set word wrap to 50
+$mail->isHTML(true);                                  // Set email format to HTML
+$mail->Subject = 'FlarePanel Password Reset';
+$mail->Body    = '<html>
+<head>
+  <title>FlarePanel Password Update</title>
+</head>
+<body>
+  <div style="text-align:center">
+  <img src="https://control.flareservers.co.uk/Testpanel/images/logo.png" alt="">
+    <h1>Your Pasword For FlarePanel Has Been Reset</h1>
+    <p>Your New Password Is: '. $password .' <br> Please change this upon login.</p>
+    <br>
+    <p>If this was not you then please contact us as soon as possible.</p>
+    <p>Many thanks FlareServers.</p>
+  </div>
+</body>
+</html>';
+$mail->AltBody = 'Your Pasword For FlarePanel Has Been Reset , Your New Password Is: '. $password .' Please change this on login , If this was not you then please contact us as soon as possible , Many thanks FlareServers.  ';
+
+if(!$mail->send()) {
+    echo 'Message could not be sent.';
+    echo 'Mailer Error: ' . $mail->ErrorInfo;
+} else {
+    //echo 'Message has been sent';
 }
+
+
+echo "<div style='text-align: center;'><div  style='margin-left: 25%;margin: auto;margin-top: -506px;text-align: center;' class='infobox'><h2>Your Password Has Been Emailed To You</h2></div></div>";
+}
+// subject
+
 ?>
+
+
+
+
+
+
+
 <style media="screen">
 body {
 background: #e9e9e9;
