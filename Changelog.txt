@@ -19,4 +19,6 @@ Added a page to add subusers;
 Added a Ajax call to update subusers;
 Added a new Ajax call for additional pages.
 Wording Changes;
+Changes Made: 20/05/17
+Passwords now to user 256SHA, Personal Salt keys & Site Wide Saltkeys
 

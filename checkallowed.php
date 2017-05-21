@@ -4,7 +4,7 @@ session_start();
 // Check if this user is logged in
 if(!isset($_SESSION['gpx_userid']))
 {
-    header('Location: login.php?try=1');
+    header('Location: ./Login/User/index.php');
     exit(0);
 }
 $gpx_userid = $_SESSION['gpx_userid'];
@@ -13,7 +13,7 @@ if(!isset($_SESSION['gpx_admin']) && isset($gpx_srvid))
 {
     $result_owns  = $GLOBALS['mysqli']->query("SELECT id FROM servers WHERE id = '$gpx_srvid' AND (userid = '$gpx_userid') OR userid2 = '$gpx_userid' LIMIT 1") or die('Failed to check ownership');
     $row_owns     = $result_owns->fetch_row();
-} 
+}
 
 
 
