@@ -1,8 +1,9 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "flareservers";
-$dbname = "gamepaneltest";
+include('../configuration.php');
+$servername = $settings['db_host'] ;
+$username = $settings['db_username'];
+$password = $settings['db_password'];
+$dbname = $settings['db_name'];
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

@@ -8,26 +8,8 @@ if(!isset($_SESSION['gpx_userid']) || !isset($_SESSION['gpx_admin'])) die('Pleas
 // Debug info
 
 ?>
-<link rel="stylesheet" type="text/css" href="../themes/dd.css" />
-<script type="text/javascript" src="../scripts/jquery.min.js"></script>
-<script type="text/javascript" src="../scripts/jquery.simplemodal.min.js"></script>
-<script type="text/javascript" src="../scripts/jquery.dd.js"></script>
-<script type="text/javascript">var ajaxURL='../ajax/ajax.php';</script>
-<script type="text/javascript" src="../scripts/gpxadmin.js"></script>
-<script type="text/javascript" src="../scripts/base64.js"></script>
-<script type="text/javascript" src="../scripts/jquery-ui.min.js"></script>
-<script type="text/javascript" src="../scripts/jquery.form.js"></script>
-<!-- <script type="text/javascript" src="../scripts/internal.min.js"></script> -->
-<script type="text/javascript" src="../scripts/internal/cloud.js"></script>
-<script type="text/javascript" src="../scripts/internal/files.js"></script>
-<script type="text/javascript" src="../scripts/internal/servers.js"></script>
-<script type="text/javascript" src="../scripts/internal/settings.js"></script>
-<script type="text/javascript" src="../scripts/internal/templates.js"></script>
-<script type="text/javascript" src="../scripts/internal/network.js"></script>
-<script type="text/javascript" src="../scripts/internal/users.js"></script>
-<script type="text/javascript" src="../scripts/internal/admins.js"></script>
-<script type="text/javascript" src="../scripts/internal/games.js"></script>
-<script type="text/javascript" src="../scripts/internal/plugins.js"></script>
+
+
 <div class="infobox" style="display:none;"></div>
 
 
@@ -35,39 +17,81 @@ if(!isset($_SESSION['gpx_userid']) || !isset($_SESSION['gpx_admin'])) die('Pleas
 
   <header>
     <div class="fa fa-gear"></div>
-    <div class="title">Site Settings</div>
+    <div class="title">Clear Login Blocks</div>
   </header>
 
   <div class="content-wrapper" style="width:76%">
     <form id="SubuserForm" action="#" method="post">
-      <?php
-      include('../configuration.php');
-      $servername = $settings['db_host'] ;
-      $username = $settings['db_username'];
-      $password = $settings['db_password'];
-      $dbname = $settings['db_name'];
-      $conn = mysqli_connect($servername,$username,$password,$dbname);
-        $MaintCheck = mysqli_query($conn,"SELECT
-          config_value
-          FROM configuration
-          WHERE config_setting = 'maint_mode'
-          ") or die ("Unable To Check Login Try Again Later");
-          $maintmode = $MaintCheck->fetch_array();
-          $maint_mode = $maintmode['config_value'];
-      if ($maint_mode != 0) {
-        echo("<button type='button' onclick='disablemaint();javascript:mainpage('sitesettings','');' class='btn btn-default waves-effect waves-light'>Disable Maintenance Mode (Users Will be able to access the site)</button>");
-      }
-      else{
-        echo ("<button type='button' onclick='enablemaint();javascript:mainpage('sitesettings','');'  class='btn btn-default waves-effect waves-light'>Enable Maintenance Mode (Users Will be unable to access the site)</button>");
-      }
+      <table border="0" cellpadding="0" cellspacing="0" align="center" width="900" id="srv_table" class="box_table" style="text-align:left;">
+        <tr>
+          <td width="25">&nbsp;</td>
+          <td width="300"><b><?php echo "Blocked User ID" ?></b></td>
+          <td width="240"><b><?php echo "Blocked Users - Username" ?></b></td>
+          <td width="240"><b><?php echo "Unblock User" ?></b></td>
+        </tr>
+        <?php
+        include('../configuration.php');
+        $servername = $settings['db_host'] ;
+        $username = $settings['db_username'];
+        $password = $settings['db_password'];
+        $dbname = $settings['db_name'];
+        //get total blocked users
+        $conn = mysqli_connect($servername,$username,$password,$dbname);
+        $result_total  = mysqli_query($conn, "SELECT
+          id
+          FROM users
+          WHERE login_attempts = 5");
+          $row_srv       = $result_total->fetch_row();
+          $total_servers = $row_srv[0];
+
+        // List server
+        // Get the blocked users
+      $result_srv = mysqli_query($conn, "SELECT
+                                          id,
+                                          username,
+                                          active
+                                          FROM users
+                                          WHERE login_attempts = 5") or die($lang['err_query'].' ('.$GLOBALS['mysqli']->error.')');
+
+      while($row_srv = $result_srv->fetch_array()){
+      $blocked_ID = $row_srv['id'];
+      //Get The Username
+      $block_usernames = mysqli_query($conn, "SELECT
+              username
+              FROM users
+              WHERE id = '$blocked_ID'") or die($lang['err_query'].' ('.$GLOBALS['mysqli']->error.')');
+      while($username = $block_usernames->fetch_array())
+      $blocked_Username = $username['username'];
+      // Makes sure if there is a blocked user
+      if ($blocked_ID != '') {
+      echo "<tr>  <td></td> <td>" . $blocked_ID . "</td><td>" . $blocked_Username . "</td> <td> <button type='button' onclick='unblock(".$blocked_ID.");'  class='btn btn-default waves-effect waves-light'>Clear Login Block</button></td> </tr>";
+
+
+  }
+    else {
+      echo "<tr><td colspan='4'>No Blocked Users</td></tr>";
+    }
+  }
+
       ?>
-      </form>
-      </select>
+      </table>
+    </form>
     </div>
   </div>
-</div>
 
-
+<script type="text/javascript">
+  function unblock(id){
+      var userid = id;
+      $.ajax({
+        type:'POST',
+        data:{ id : id , somevar : "yes"  },
+        url:'../ajax/clearloginblock.php',
+        success:function(data) {
+          alert(data);
+        }
+      });
+  }
+</script>
 
 <!--
 
@@ -4006,5 +4030,13 @@ to {
   background-position: 0% 75%;
 }
 }
-
+.box_table:hover{
+  background: none;
+}
+.box_table tr:hover{
+  background: none;
+}
+.box_table td:hover{
+  background: none;
+}
 </style>

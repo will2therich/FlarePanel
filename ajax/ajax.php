@@ -13,7 +13,7 @@ $allowed_reqs = array('login_actions','main_default','main_servers','main_server
                       'server_info','server_settings','server_files','server_startup','server_actions','server_create_form','main_subusers',
                       'cloud_gameinfo','cloud_gameinstall','cloud_actions',
                       'template_edit','template_actions','template_create_form','template_status',
-                      'file_actions','file_load_dir','main_sitesettings',
+                      'file_actions','file_load_dir','main_sitesettings','main_clearloginblocks',
                       'network_create_form','network_edit','network_actions',
                       'user_create_form','user_edit','user_actions',
                       'admin_actions','admin_create_form',

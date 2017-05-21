@@ -4,6 +4,7 @@ $servername = $settings['db_host'] ;
 $username = $settings['db_username'];
 $password = $settings['db_password'];
 $dbname = $settings['db_name'];
+
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -11,7 +12,10 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-echo "Maintinence Mode Enabled successfully";
-mysqli_query($conn , "UPDATE configuration SET config_value = '1' WHERE config_setting = 'maint_mode' ");
+if(isset($_REQUEST['somevar'])){
+  $id = $_POST['id'];
+   mysqli_query($conn , "UPDATE users SET login_attempts = '0' WHERE id = '$id' ");
+echo "Updated Sucessfully";
+}
 
 ?>

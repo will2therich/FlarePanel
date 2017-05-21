@@ -9,13 +9,10 @@ $Plugins->do_action('home_top'); // Plugins
 if(GPXDEBUG)
 {
     // Get version
-    $result_vr    = $GLOBALS['mysqli']->query("SELECT config_value FROM configuration WHERE config_setting = 'version' LIMIT 1");
+    //$result_vr    = $GLOBALS['mysqli']->query("SELECT config_value FROM configuration WHERE config_setting = 'version' LIMIT 1");
     $row_vr       = $result_vr->fetch_row();
     $gpx_version  = $row_vr[0];
 
-    echo '<b>NOTICE:</b> Debug mode has been enabled in configuration.php.<br />';
-    echo 'DEBUG: Master Version '.$gpx_version.'<br />';
-    echo 'DEBUG: Document Root: '.DOCROOT.'<br />';
     if($GLOBALS['mysqli']->error) echo 'DEBUG: Last MySQL error: '.$GLOBALS['mysqli']->error.'<br />';
 }
 ?>
