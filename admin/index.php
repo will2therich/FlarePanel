@@ -168,6 +168,7 @@ $(document).ready(function(){
     <li><a href="#!">Site Settings</a>
     <ul class="nav-dropdown">
       <li onClick="javascript:mainpage('sitesettings','');"><a href="#!"><img src="../images/icons/medium/template.png" width="18" height="18" /><?php echo 'Global Settings' ?></a></li>
+      <!-- <li onClick="javascript:mainpage('Masquerade','');"><a href="#!"><img src="../images/icons/medium/template.png" width="18" height="18" /><?php echo 'Masquerade As A User' ?></a></li> -->
       <li onClick="javascript:mainpage('clearloginblocks','');"><a href="#!"><img src="../images/icons/medium/template.png" width="18" height="18" /><?php echo 'Clear Login Blocks' ?></a></li>
     </ul></li>
     <li><a href="#!"><?php echo $_SESSION['gpx_username']; ?></a>

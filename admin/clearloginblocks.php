@@ -65,8 +65,6 @@ if(!isset($_SESSION['gpx_userid']) || !isset($_SESSION['gpx_admin'])) die('Pleas
       // Makes sure if there is a blocked user
       if ($blocked_ID != '') {
       echo "<tr>  <td></td> <td>" . $blocked_ID . "</td><td>" . $blocked_Username . "</td> <td> <button type='button' onclick='unblock(".$blocked_ID.");'  class='btn btn-default waves-effect waves-light'>Clear Login Block</button></td> </tr>";
-
-
   }
     else {
       echo "<tr><td colspan='4'>No Blocked Users</td></tr>";
@@ -86,9 +84,6 @@ if(!isset($_SESSION['gpx_userid']) || !isset($_SESSION['gpx_admin'])) die('Pleas
         type:'POST',
         data:{ id : id , somevar : "yes"  },
         url:'../ajax/clearloginblock.php',
-        success:function(data) {
-          alert(data);
-        }
       });
   }
 </script>
