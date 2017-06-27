@@ -10,7 +10,7 @@ $Core = new Core;
 $Core->dbconnect();
 ?>
 
-<div id="homeic_boxes_client" style="width:650px;">
+<div id="homeic_boxes_client" style="width:100%;">
     <div class="homeic_box_client" onClick="javascript:mainpage('servers','g');">
         <img src="images/icons/medium/servers.png" /><?php echo 'Servers - ALPHA' ?>
     </div>
@@ -23,4 +23,24 @@ $Core->dbconnect();
     <div class="homeic_box_client" onClick="javascript:window.location='logout.php';">
         <img src="images/icons/medium/logout.png" /><?php echo $lang['logout']; ?>
     </div>
+    <!-- <?php
+    if($_SESSION['MASK'] == 1){
+        echo '
+    <div class="homeic_box_client" id="update">
+        <img src="images/icons/medium/logout.png" /><?php echo "Unmasquerade" ?>
+    </div>
+    ';
+  }
+    ?>
+    <script>
+    // Check for system update
+    $("#update").click(function(e) {
+      e.preventDefault();
+      $.ajax({
+        type:'POST',
+        url:'/ajax/MasqueradeStop.php',
+      });
+    });
+    </script> -->
+
 </div>

@@ -144,7 +144,11 @@ require('checkallowed.php'); // Check logged-in
 </table>
 
 
-
+<?php
+echo '<pre>';
+Var_dump($_SESSION);
+echo '</pre>';
+?>
 
 
 

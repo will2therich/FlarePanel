@@ -1,5 +1,5 @@
 <?php
-//require('checkallowed.php'); // Check logged-in
+require('checkallowed.php'); // Check logged-in
 
 if(isset($_SESSION['gpx_admin'])) die('Cannot view client area as an admin!');
 
@@ -8,6 +8,19 @@ require(DOCROOT.'/lang.php');
 
 // Check Install
 if(file_exists('install')) die('Currently down for maintenance.  Please try again soon.');
+
+
+$conn = mysqli_connect("localhost","root","flareservers","gamepaneltest");
+  $MaintCheck = mysqli_query($conn,"SELECT
+    config_value
+    FROM configuration
+    WHERE config_setting = 'maint_mode'
+    ") or die ("Unable To Check Login Try Again Later");
+    $maintmode = $MaintCheck->fetch_array();
+    $maint_mode = $maintmode['config_value'];
+if ($maint_mode != 0) {
+  header('Location: ./Maint.php');
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,15 +46,15 @@ else echo '<link rel="stylesheet" type="text/css" href="themes/default/index.css
 <script type="text/javascript" src="scripts/internal/settings.js"></script>
 <script type="text/javascript" src="scripts/internal/users.js"></script>
 
-<link href="scripts/upload/fileuploader.css" rel="stylesheet" type="text/css">	
+<link href="scripts/upload/fileuploader.css" rel="stylesheet" type="text/css">
 <script src="scripts/upload/fileuploader.js" type="text/javascript"></script>
 <script type="text/javascript">
-function createUploader(){            
+function createUploader(){
   var uploader = new qq.FileUploader({
       element: document.getElementById("file_up"),
       action: "ajax/file_upload.php",
       debug: true
-  });           
+  });
 }
 </script>
 
@@ -62,12 +75,12 @@ $(document).ready(function(){
     $('#leftpanel_network').click(function(){
         $('#leftpanel_network_items').slideToggle('fast');
     });
-    
+
     // Confirm leaving since everything is ajaxy
     $(window).bind('beforeunload', function(){
         return 'Are you sure you want to leave?';
     });
-    
+
     // Load servers as default page
     mainpage('servers','');
 });

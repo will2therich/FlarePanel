@@ -22,3 +22,10 @@ Wording Changes;
 Changes Made: 20/05/17
 Passwords now to user 256SHA, Personal Salt keys & Site Wide Saltkeys
 
+Changes made 18/05/17 - For Testing:
+Updated Login Scrips to use:
+SHA-256 hashing,
+Random Personal Salt Keys,
+Site Wide Salt Keys.
+Changed login Directories
+

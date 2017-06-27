@@ -23,7 +23,7 @@ require('checkallowed.php'); // Check logged-in
   </tr>
 <?php
 // List network servers
-$result_net = $GLOBALS['mysqli']->query("SELECT DISTINCT 
+$result_net = $GLOBALS['mysqli']->query("SELECT  
                                   n.id,
                                   n.is_local,
                                   n.ip,
@@ -31,15 +31,13 @@ $result_net = $GLOBALS['mysqli']->query("SELECT DISTINCT
                                   n.os,
                                   n.datacenter 
                                 FROM network AS n 
-                                WHERE 
-                                  n.parentid IS NULL 
                                 ORDER BY 
                                   n.id DESC") or die('Failed to query for network servers: '.$GLOBALS['mysqli']->error);
 
 while($row_net  = $result_net->fetch_array())
 {
     $net_id     = $row_net['id'];
-    #$net_local  = $row_net['is_local'];
+    $net_local  = $row_net['is_local'];
     $net_ip     = $row_net['ip'];
     $net_loc    = $row_net['location'];
     $net_os     = $row_net['os'];

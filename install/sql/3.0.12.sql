@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS `admins` (
   `email_address` varchar(255) NOT NULL,
   `first_name` varchar(128) NOT NULL,
   `last_name` varchar(128) NOT NULL,
+  `psalt` varchar(20) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `username` (`username`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
@@ -242,6 +243,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email_address` varchar(255) NOT NULL,
   `first_name` varchar(128) NOT NULL,
   `last_name` varchar(128) NOT NULL,
+  `login_attempts` int(10) unsigned NOT NULL,
+  `p_salt` varchar(20) NOT NULL,
+  `setpass_3010` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `username` (`username`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;

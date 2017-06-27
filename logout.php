@@ -4,7 +4,7 @@ session_start();
 session_destroy();
 
 // Redirect to login page
-header('Location: login.php?out=1');
+header('Location: ./Login/User/index.php');
 exit(0);
 
 ?>
