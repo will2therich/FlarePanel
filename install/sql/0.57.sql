@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `servers` (
   `simplecmd` varchar(600) NOT NULL,
   `description` varchar(600) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `userid` (`userid`)
+  KEY `userid` (`userid`),
   KEY `userid2` (`userid2`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
