@@ -19,7 +19,8 @@
 <?php
 session_start();
 //require('../configuration.php'); // No direct access
-$conn = mysqli_connect("localhost","root","flareservers","gamepaneltest");
+include("../../configuration.php");
+$conn = mysqli_connect($settings['db_host'],$settings['db_username'],$settings['db_password'],$settings['db_name']);
 if($_SESSION['user']!=''){header("Location:home.php");}
 include("config.php");
 $email=$_POST['mail'];
