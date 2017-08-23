@@ -128,6 +128,7 @@ CREATE TABLE IF NOT EXISTS `resellers` (
 CREATE TABLE IF NOT EXISTS `servers` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `userid` int(10) unsigned NOT NULL,
+  `userid2` int(10) unsigned NOT NULL,
   `netid` int(10) unsigned NOT NULL,
   `defid` int(10) unsigned NOT NULL,
   `port` smallint(5) unsigned NOT NULL,
@@ -148,6 +149,7 @@ CREATE TABLE IF NOT EXISTS `servers` (
   `description` varchar(600) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `userid` (`userid`)
+  KEY `userid2` (`userid2`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `servers_startup` (

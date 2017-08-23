@@ -7,7 +7,13 @@ require('checkallowed.php'); // Check logged-in
     <div class="page_title_text"><?php echo $lang['servers']; ?></div>
 </div>
 
+<?php
 
+include("./configuration.php");
+$GLOBALS['mysqli'] = mysqli_connect($settings['db_host'],$settings['db_username'],$settings['db_password'],$settings['db_name']);
+$conn = mysqli_connect($settings['db_host'],$settings['db_username'],$settings['db_password'],$settings['db_name']);
+
+?>
 <div class="box">
 <div class="box_title" id="box_servers_title"><?php echo "Servers - TESTING PAGE FUNCTIONS MAY NOT WORK" ?></div>
 <div class="box_content" id="box_servers_content">
@@ -22,6 +28,7 @@ require('checkallowed.php'); // Check logged-in
     <td width="150"><b><?php echo $lang['status']; ?></b></td>
     <td width="80"><b><?php echo '<span style="font-size:8pt;">'.$gpx_userid.'</span><br />';; ?></b></td>
   </tr>
+
   <?php
   // Game or voice or all
   $url_type = $GPXIN['t'];
@@ -37,22 +44,21 @@ require('checkallowed.php'); // Check logged-in
   else $sql_limit = '0,15';
 
   // Get total servers
-  $result_total  = $GLOBALS['mysqli']->query("SELECT
+  $result_total  = mysqli_query($conn,"SELECT
 				    s.userid,
 					s.userid2
 				 FROM servers AS s
 				 LEFT JOIN default_games AS d ON
 				     s.defid = d.id
 				 WHERE
-				 (s.userid = '$gpx_userid') or s.userid2 = '$gpx_userid'
-				  ");
+				 (s.userid = '$gpx_userid') or s.userid2 = '$gpx_userid'");
   $row_srv       = $result_total->fetch_row();
   $total_servers = $row_srv[0];
 
 
 
   // List servers
-  $result_srv = $GLOBALS['mysqli']->query("SELECT
+  $result_srv =  mysqli_query($conn,"SELECT
                                 s.id,
 								s.userid,
 								s.userid2,
@@ -144,11 +150,6 @@ require('checkallowed.php'); // Check logged-in
 </table>
 
 
-<?php
-echo '<pre>';
-Var_dump($_SESSION);
-echo '</pre>';
-?>
 
 
 

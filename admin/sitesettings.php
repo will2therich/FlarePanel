@@ -24,7 +24,8 @@ if(!isset($_SESSION['gpx_userid']) || !isset($_SESSION['gpx_admin'])) die('Pleas
   <div class="content-wrapper" style="width:76%">
     <form id="SubuserForm" action="#" method="post">
       <?php
-      $conn = mysqli_connect("localhost","root","flareservers","gamepaneltest");
+      include("../configuration.php");
+      $conn = mysqli_connect($settings['db_host'],$settings['db_username'],$settings['db_password'],$settings['db_name']);
         $MaintCheck = mysqli_query($conn,"SELECT
           config_value
           FROM configuration

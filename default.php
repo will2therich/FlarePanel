@@ -9,7 +9,14 @@ require(DOCROOT.'/includes/classes/core.php');
 $Core = new Core;
 $Core->dbconnect();
 ?>
+<?php
 
+include("./configuration.php");
+$GLOBALS['mysqli'] = mysqli_connect($settings['db_host'],$settings['db_username'],$settings['db_password'],$settings['db_name']);
+$conn = mysqli_connect($settings['db_host'],$settings['db_username'],$settings['db_password'],$settings['db_name']);
+
+
+?>
 <div id="homeic_boxes_client" style="width:100%;">
     <div class="homeic_box_client" onClick="javascript:mainpage('servers','g');">
         <img src="images/icons/medium/servers.png" /><?php echo 'Servers - ALPHA' ?>
@@ -23,6 +30,7 @@ $Core->dbconnect();
     <div class="homeic_box_client" onClick="javascript:window.location='logout.php';">
         <img src="images/icons/medium/logout.png" /><?php echo $lang['logout']; ?>
     </div>
+
     <!-- <?php
     if($_SESSION['MASK'] == 1){
         echo '
@@ -31,7 +39,10 @@ $Core->dbconnect();
     </div>
     ';
   }
+
     ?>
+
+
     <script>
     // Check for system update
     $("#update").click(function(e) {

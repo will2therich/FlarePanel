@@ -90,9 +90,9 @@ else echo '<link rel="stylesheet" type="text/css" href="../../themes/default/ind
 <?php
 session_start();
 //require('../configuration.php'); // No direct access
-$conn = mysqli_connect("localhost","root","flareservers","gamepaneltest");
-if($_SESSION['user']!=''){header("Location:home.php");}
 include("../../configuration.php");
+$conn = mysqli_connect($settings['db_host'],$settings['db_username'],$settings['db_password'],$settings['db_name']);
+if($_SESSION['user']!=''){header("Location:home.php");}
 include("config.php");
 $email=$_POST['mail'];
 $password=$_POST['pass'];
@@ -125,7 +125,6 @@ if(isset($_POST) && $email!='' && $password!=''){
                                   FROM users
                                   WHERE
                                     `username` = '$email'
-                                    AND AES_DECRYPT(sso_pass, '$enc_key') = '$password'
                                     AND `deleted` = '0'
                                   ORDER BY id ASC
                                   LIMIT 1") or die('Sorry, we were unable to check your login.  Please try again soon.');
