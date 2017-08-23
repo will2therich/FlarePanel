@@ -3,33 +3,21 @@ CREATE TABLE IF NOT EXISTS `admins` (
   `deleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `setpass_3010` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `date_created` datetime NOT NULL,
-<<<<<<< HEAD
   `last_updated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `username` varchar(16) NOT NULL,
   `password` varchar(255) NOT NULL,
   `theme` varchar(64) NULL,
-=======
-  `last_updated` datetime NOT NULL,
-  `username` varchar(16) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `theme` varchar(64) NOT NULL,
->>>>>>> master
   `language` varchar(64) NOT NULL DEFAULT 'english',
   `email_address` varchar(255) NOT NULL,
   `first_name` varchar(128) NOT NULL,
   `last_name` varchar(128) NOT NULL,
-  `psalt` varchar(20) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `username` (`username`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `configuration` (
   `last_updated_by` int(10) unsigned NOT NULL,
-<<<<<<< HEAD
   `last_updated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-=======
-  `last_updated` datetime NOT NULL,
->>>>>>> master
   `config_setting` varchar(64) NOT NULL,
   `config_value` varchar(255) NOT NULL,
   KEY `config_setting` (`config_setting`)
@@ -95,11 +83,7 @@ CREATE TABLE IF NOT EXISTS `loadavg` (
 
 CREATE TABLE IF NOT EXISTS `network` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-<<<<<<< HEAD
   `parentid` int(10) unsigned NOT NULL DEFAULT '0',
-=======
-  `parentid` int(10) unsigned NOT NULL,
->>>>>>> master
   `is_local` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `login_user` blob NOT NULL,
   `login_pass` blob NOT NULL,
@@ -109,11 +93,7 @@ CREATE TABLE IF NOT EXISTS `network` (
   `os` varchar(64) NOT NULL,
   `location` varchar(128) NOT NULL,
   `datacenter` varchar(128) NOT NULL,
-<<<<<<< HEAD
   `homedir` varchar(255) NULL,
-=======
-  `homedir` varchar(255) NOT NULL,
->>>>>>> master
   PRIMARY KEY (`id`),
   KEY `parentid` (`parentid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
@@ -133,11 +113,7 @@ CREATE TABLE IF NOT EXISTS `resellers` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `deleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `date_created` datetime NOT NULL,
-<<<<<<< HEAD
   `last_updated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-=======
-  `last_updated` datetime NOT NULL,
->>>>>>> master
   `language` varchar(64) NOT NULL DEFAULT 'english',
   `username` varchar(16) NOT NULL,
   `password` varchar(64) NOT NULL,
@@ -158,11 +134,7 @@ CREATE TABLE IF NOT EXISTS `servers` (
   `startup` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `status` enum('none','installing','updating','failed','complete') NOT NULL DEFAULT 'none',
   `date_created` datetime NOT NULL,
-<<<<<<< HEAD
   `last_updated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-=======
-  `last_updated` datetime NOT NULL,
->>>>>>> master
   `token` varchar(32) NOT NULL,
   `map` varchar(255) NOT NULL,
   `rcon` varchar(255) NOT NULL,
@@ -193,19 +165,11 @@ CREATE TABLE IF NOT EXISTS `templates` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `netid` int(10) unsigned NOT NULL,
   `cfgid` int(10) unsigned NOT NULL,
-<<<<<<< HEAD
   `steam_percent` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `date_created` datetime NOT NULL,
   `is_default` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `status` enum('none','running','steam_running','failed','tpl_running','complete') NOT NULL DEFAULT 'none',
   `size` varchar(12) NOT NULL DEFAULT '0',
-=======
-  `steam_percent` tinyint(3) unsigned NOT NULL,
-  `date_created` datetime NOT NULL,
-  `is_default` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `status` enum('none','running','steam_running','failed','tpl_running','complete') NOT NULL DEFAULT 'none',
-  `size` varchar(12) NOT NULL,
->>>>>>> master
   `token` varchar(32) NOT NULL,
   `description` varchar(255) NOT NULL,
   `file_path` varchar(400) NOT NULL,
@@ -218,6 +182,7 @@ CREATE TABLE IF NOT EXISTS `templates` (
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `deleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `login_attempts` int(10) unsigned NOT NULL DEFAULT '0',
   `active` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `perm_ftp` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `perm_files` tinyint(1) unsigned NOT NULL DEFAULT '1',
@@ -226,26 +191,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `perm_chpass` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `perm_updetails` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `date_created` datetime NOT NULL,
-<<<<<<< HEAD
   `last_updated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `sso_user` blob NOT NULL,
   `sso_pass` blob NOT NULL,
   `theme` varchar(64) NULL,
-=======
-  `last_updated` datetime NOT NULL,
-  `sso_user` blob NOT NULL,
-  `sso_pass` blob NOT NULL,
-  `theme` varchar(64) NOT NULL,
->>>>>>> master
   `language` varchar(64) NOT NULL DEFAULT 'english',
   `username` varchar(16) NOT NULL,
   `password` varchar(64) NOT NULL,
   `email_address` varchar(255) NOT NULL,
   `first_name` varchar(128) NOT NULL,
   `last_name` varchar(128) NOT NULL,
-  `login_attempts` int(10) unsigned NOT NULL,
-  `p_salt` varchar(20) NOT NULL,
-  `setpass_3010` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `username` (`username`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
