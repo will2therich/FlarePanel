@@ -1,5 +1,6 @@
 <?php
 // User Accounts class
+include("../../configuration.php");
 class Users
 {
     // Create a new user account
