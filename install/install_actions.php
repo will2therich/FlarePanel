@@ -143,6 +143,8 @@ $settings[\'db_password\']  = \''.$url_db_pass.'\'; // Your database password
 $settings[\'docroot\']      = \''.$this_docroot.'\'; // Set to the full path to your GamePanelX installation e.g. /home/me/public_html/gpx/
 $settings[\'enc_key\']      = \''.$rand_string.'\'; // No need to change this
 $settings[\'debug\']        = false;
+$GLOBALS[\'mysqli\'] = mysqli_connect($settings[\'db_host\'],$settings[\'db_username\'],$settings[\'db_password\'],$settings[\'db_name\']);
+
 
 ###################################
 
