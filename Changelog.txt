@@ -8,6 +8,13 @@ Will - Head Of New Developments - FlareServers
 Lead Tester
 Callum - Head Of Infrastrucutre - FlareServers
 
+Changes made Ver 0.58
+ - Updated SQL connections and installer to stop issues on user creation
+ - Updating installer to stop errors caused by new features
+ - Started to update styling on the admin pages
+ 
+
+
 Changes made 26/04/17
 PHP 7.0 Support - mysql_connect - depreciation;
 Version Number changed to = 0.57
