@@ -1,6 +1,6 @@
 FlarePanel!
 
-Current Version: 0.57
+Current Version: 0.58
 
 Flarepanel is a Gamepanel that is being built on the base of GamePanelX-V3 by Ryan Gehrig See the information below.
 FlareServers intends to Develop FlarePanel and add many more features including an entire rewright of most of the code.
