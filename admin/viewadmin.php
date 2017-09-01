@@ -1,6 +1,11 @@
 <?php
 require('checkallowed.php'); // Check logged-in
-$url_id = $GPXIN['id'];
+if (isset($GPXIN['id'])){
+    $url_id = $GPXIN['id'];
+
+}else{
+    $url_id = $_SESSION['gpx_userid'];
+}
 
 // Get user info
 $result_usr = $GLOBALS['mysqli']->query("SELECT 

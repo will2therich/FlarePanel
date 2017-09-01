@@ -2,15 +2,18 @@
 require('checkallowed.php'); // Check logged-in
 ?>
 
-<div class="page_title">
-    <div class="page_title_icon"><img src="../images/icons/medium/accounts.png" border="0" /></div>
-    <div class="page_title_text"><?php echo $lang['admins']; ?></div>
-</div>
+<link rel="stylesheet" href="mainstyles.css">
+<div class="container" style="color:white !important;font-size:15px;margin-top: 2%;height: 75%">
+
+    <header>
+        <div class="fa fa-gear"></div>
+        <div class="title">Admin Dash - Manage Admins</div>
+    </header>
 
 
-<div class="box">
-<div class="box_title" id="box_servers_title"><?php echo $lang['admins']; ?></div>
-<div class="box_content" id="box_servers_content">
+<!--<div class="box">-->
+<!--<div class="box_title" id="box_servers_title">--><?php //echo $lang['admins']; ?><!--</div>-->
+<!--<div class="box_content" id="box_servers_content">-->
 
 <table border="0" cellpadding="0" cellspacing="0" align="center" width="700" class="box_table" style="text-align:left;">
   <tr>
@@ -52,4 +55,4 @@ while($row_usr  = $result_usr->fetch_array())
 </table>
 
 </div>
-</div>
+<!--</div>-->

@@ -102,10 +102,7 @@ if(!isset($_SESSION['gpx_userid']) || !isset($_SESSION['gpx_admin'])) die('Pleas
 
 
  <script>
- // Check for system updates
- $(document).ready(function(){
-     setTimeout("cloud_check_updates()", 500);
- });
+
  $("#update").click(function(e) {
    e.preventDefault();
    var serverid = $("#ServerID").val();
