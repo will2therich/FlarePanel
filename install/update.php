@@ -60,7 +60,7 @@ if(GPX_VERSION == $cur_version) die('You are already up to date (v'.$cur_version
 <div class="box_title" id="box_servers_title">GamePanelX Update</div>
 <div class="box_content" id="box_servers_content">
 
-Welcome to the GamePanelX Update page!<br /><br />
+Welcome to the FlarePanel Update page!<br /><br />
 
 <?php
 if(!isset($_GET['go']))
