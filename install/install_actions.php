@@ -189,7 +189,7 @@ else error_reporting(E_ERROR);
         $gpx_version  = GPX_VERSION;
         $admin_id = $GLOBALS['mysqli']->query("SELECT id FROM admins WHERE username = '$url_admin_user' LIMIT 1");
         $admin_id = $admin_id->fetch_row()[0];
-        $GLOBALS['mysqli']->query("INSERT INTO `configuration` (`config_setting`, `config_value`, `last_updated_by`) VALUES('default_email_address', '$url_admin_email',$admin_id),('language', '$url_language',$admin_id),('company', 'GamePanelX',$admin_id),('theme', 'default',$admin_id),('api_key', '$api_key',$admin_id),('version', '$gpx_version',$admin_id),('steam_login_user','',$admin_id),('steam_login_pass','',$admin_id),('steam_auth','',$admin_id)") or die('Failed to insert configuration items: '.$GLOBALS['mysqli']->error);
+        $GLOBALS['mysqli']->query("INSERT INTO `configuration` (`config_setting`, `config_value`, `last_updated_by`) VALUES('default_email_address', '$url_admin_email',$admin_id),('language', '$url_language',$admin_id),('company', 'GamePanelX',$admin_id),('theme', 'default',$admin_id),('api_key', '$api_key',$admin_id),('version', '$gpx_version',$admin_id),('steam_login_user','',$admin_id),('steam_login_pass','',$admin_id),('steam_auth','',$admin_id),('maint_mode','0',$admin_id)") or die('Failed to insert configuration items: '.$GLOBALS['mysqli']->error);
     }
     
     $_SESSION['install_configitems']  = 1;

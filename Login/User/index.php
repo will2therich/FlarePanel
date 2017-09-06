@@ -7,7 +7,18 @@ if(isset($_SESSION['gpx_userid']))
     header('Location: ../../index.php');
     exit(0);
 }
-
+include("../../configuration.php");
+$conn = $GLOBALS['mysqli'];
+$MaintCheck = mysqli_query($conn,"SELECT
+    config_value
+    FROM configuration
+    WHERE config_setting = 'maint_mode'
+    ") or die ("Unable To Check Login Try Again Later");
+$maintmode = $MaintCheck->fetch_array();
+$maint_mode = $maintmode['config_value'];
+if ($maint_mode != 0) {
+    header('Location: ../../Maint.php');
+}
 // if(!file_exists('../../configuration.php')) die('Currently down for maintenance.  Please try again soon.');
 
 require('../../configuration.php');

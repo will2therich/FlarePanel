@@ -1,4 +1,12 @@
-<?php
+<link rel="stylesheet" href="mainstyles.css">
+<div class="container" style="color:white !important;font-size:15px;margin-top: 2%;height: 75%">
+
+    <header>
+        <div class="fa fa-gear"></div>
+        <div class="title">Admin Dash - Manage User Details</div>
+    </header>
+<div class="center" style="margin-left: 28%;">
+    <?php
 require('checkallowed.php'); // Check logged-in
 
 $url_id = $GPXIN['id'];
@@ -35,9 +43,9 @@ include(DOCROOT.'/ajax/user_tabs.php');
 <div class="infobox" style="display:none;"></div>
 
 
-<div class="box" style="width:750px;">
-<div class="box_title" id="box_servers_title"><?php echo $lang['info']; ?></div>
-<div class="box_content" id="box_servers_content">
+<!--<div class="box" style="width:750px;">-->
+<!--<div class="box_title" id="box_servers_title">--><?php //echo $lang['info']; ?><!--</div>-->
+<!--<div class="box_content" id="box_servers_content">-->
 
 
 <table border="0" cellpadding="2" cellspacing="0" width="700" class="cfg_table" style="margin-top:20px;">
@@ -142,9 +150,9 @@ include(DOCROOT.'/ajax/user_tabs.php');
 </tr>
 
 </table>
+
 </div>
-
-
 <div align="center">
   <div class="button" onClick="javascript:user_save(<?php echo $url_id; ?>);"><?php echo $lang['save']; ?></div>
+</div>
 </div>

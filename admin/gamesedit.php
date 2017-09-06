@@ -2,10 +2,14 @@
 require('checkallowed.php'); // Check logged-in
 ?>
 
-<div class="page_title">
-    <div class="page_title_icon"><img src="../images/icons/medium/edit.png" border="0" /></div>
-    <div class="page_title_text"><?php echo $lang['settings']; ?></div>
-</div>
+<link rel="stylesheet" href="mainstyles.css">
+<div class="container" style="color:white !important;font-size:15px;margin-top: 2%;height: 90%">
+
+    <header>
+        <div class="fa fa-gear"></div>
+        <div class="title">Admin Dash - Manage Template</div>
+    </header>
+<div class="center" style="margin-left: 18%">
 
 <?php
 $url_id = $GPXIN['id'];
@@ -79,9 +83,8 @@ while($row  = $result->fetch_array())
 ?>
 
 <div id="gedit_general" class="gedit_area">
-    <div class="box" style="width:750px;">
-    <div class="box_title" id="box_servers_title"><?php echo $lang['edit']; ?></div>
-    <div class="box_content" id="box_servers_content">
+    <table border="0" style="margin-top:20px;margin-left: 331px;" cellpadding="2" cellspacing="0" width="700" class="cfg_table" style="margin-top:20px;">
+
     
     <table border="0" cellpadding="2" cellspacing="0" width="650" class="cfg_table">
     <tr>
@@ -255,15 +258,14 @@ foreach($gameslist as $game) {
     </tr>
     </table>
     
-    </div></div>
+<!--    </div>-->
 </div>
 
 
 <div id="gedit_auto" style="display:none;" class="gedit_area">
-    <div class="box" style="width:750px;">
-    <div class="box_title" id="box_servers_title">Automation</div>
-    <div class="box_content" id="box_servers_content">
-    
+<!--    <table border="0" style="margin-top:20px;margin-left: 331px;" cellpadding="2" cellspacing="0" width="700" class="cfg_table" style="margin-top:20px;">-->
+
+
     <table border="0" cellpadding="2" cellspacing="0" width="650" class="cfg_table">
     <tr>
       <td width="250"><b>Steam:</b></td>
@@ -293,14 +295,10 @@ foreach($gameslist as $game) {
     </tr>
     </table>
     
-    </div></div>
 </div>
 
 <div id="gedit_config" style="display:none;" class="gedit_area">
-    <div class="box" style="width:750px;">
-    <div class="box_title" id="box_servers_title">Config Items (<?php echo $lang['optional']; ?>)</div>
-    <div class="box_content" id="box_servers_content">
-    
+<!--    <table border="0" style="margin-top:20px;margin-left: 331px;" cellpadding="2" cellspacing="0" width="700" class="cfg_table" style="margin-top:20px;">-->
     <table border="0" cellpadding="2" cellspacing="0" width="650" class="cfg_table">
     <tr>
       <td width="250"><b>Config Separator:</b></td>
@@ -336,14 +334,13 @@ foreach($gameslist as $game) {
     </tr>
     </table>
     
-    </div></div>
+<!--    </div>-->
 </div>
 
 <div id="gedit_misc" style="display:none;" class="gedit_area">
-    <div class="box" style="width:750px;">
-    <div class="box_title" id="box_servers_title">Miscellaneous</div>
-    <div class="box_content" id="box_servers_content">
-    
+<!--    <table border="0" style="margin-top:20px;margin-left: 331px;" cellpadding="2" cellspacing="0" width="700" class="cfg_table" style="margin-top:20px;">-->
+
+
     <table border="0" cellpadding="2" cellspacing="0" width="650" class="cfg_table">
     <tr>
       <td width="250"><b><?php echo $lang['working_dir']; ?></b> (<?php echo $lang['optional']; ?>):</td>
@@ -381,12 +378,17 @@ foreach($gameslist as $game) {
     </tr>
     </table>
     
-    </div></div>
+<!--    </div></div>-->
+    </div>
+    <div style="text-align: center;">
+
+        <div class="btn btn-default waves-effect waves-light" onClick="javascript:game_save(<?php echo $url_id; ?>);"><?php echo $lang['save']; ?></div>
+    </div>
+
 </div>
 
 
 <br />
 
-<div class="button" onClick="javascript:game_save(<?php echo $url_id; ?>);"><?php echo $lang['save']; ?></div>
 
 </div></div>

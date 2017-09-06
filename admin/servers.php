@@ -1,19 +1,22 @@
 <?php
 require('checkallowed.php'); // Check logged-in
 ?>
+<div class="container" style="color:white !important;font-size:15px;margin-top: 5%;">
 
-<div class="page_title">
-    <div class="page_title_icon"><img src="../images/icons/medium/servers.png" border="0" /></div>
-    <div class="page_title_text"><?php echo $lang['servers']; ?></div>
-</div>
+    <header>
+        <div class="fa fa-gear"></div>
+        <div class="title">Admin Dash - Servers</div>
+    </header>
 
 <?php $Plugins->do_action('servers_top'); // Plugins ?>
 
-<div class="box">
-<div class="box_title" id="box_servers_title"><?php echo $lang['servers']; ?></div>
-<div class="box_content" id="box_servers_content">
+<!--<div class="box">-->
+<!--<div class="box_title" id="box_servers_title">--><?php //echo $lang['servers']; ?><!--</div>-->
+<!--<div class="box_content" id="box_servers_content">-->
+<!--</div>-->
+<!--</div>-->
 
-<table border="0" cellpadding="0" cellspacing="0" align="center" width="920" id="srv_table" class="box_table" style="text-align:left;">
+<table table border="0"  style="margin-left: 70px;width: 85%;" cellpadding="2" cellspacing="0" width="600" class="cfg_table">
   <tr>
     <td width="25">&nbsp;</td>
     <td width="410"><b><?php echo $lang['game']; ?></b></td>
@@ -141,8 +144,6 @@ require('checkallowed.php'); // Check logged-in
 <?php $Plugins->do_action('servers_table'); // Plugins ?>
 </table>
 
-</div>
-</div>
 
 <?php
 // Server Paging
@@ -157,10 +158,10 @@ if($total_servers > 15) {
 	}
 }
 else {
-	echo '<span style="font-size:9pt;">Page: 0</span><br />';
+	echo '<span style="font-size:9pt;margin-left:10px;">Page: 0</span><br />';
 }
 
-echo '<br /><span style="font-size:9pt;">'. $lang['servers'] . ': '.$total_servers.'</span><br /><br />';
+echo '<br /><span style="font-size:9pt;margin-left:10px;">'. $lang['servers'] . ': '.$total_servers.'</span><br /><br />';
 ?>
 
 <script type="text/javascript">
@@ -172,3 +173,286 @@ $(document).ready(function(){
 <input type='hidden' id='json_hid' value='<?php echo $json_str; ?>' />
 
 <?php $Plugins->do_action('servers_bottom'); // Plugins ?>
+
+
+
+<style media="screen">
+    html{
+        background-color: #3e3e3e;
+    }
+    .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 72rem;
+        height: 29rem;
+        background: #3e3e3e;
+        box-shadow: 0 30px 20px -20px rgba(0, 0, 0, 0.3);
+        box-sizing: border-box;
+    }
+    header {
+        width: 100%;
+        height: 3rem;
+        padding-left: 2rem;
+        background: -webkit-linear-gradient(45deg, #FF512F, #DD2476);
+        background: linear-gradient(45deg, #FF512F, #DD2476);
+        background-size: 300% 300%;
+        color: #fff;
+        clear: both;
+        box-sizing: border-box;
+        -webkit-animation: coolgrad 6s ease infinite;
+        animation: coolgrad 6s ease infinite;
+    }
+    header .fa {
+        font-size: 1.4rem;
+        height: 3rem;
+        line-height: 3rem;
+        float: left;
+        -webkit-animation: spin 4s ease infinite;
+        animation: spin 4s ease infinite;
+    }
+    header .title {
+        position: relative;
+        height: 3rem;
+        line-height: 3rem;
+        font-weight: bold;
+        float: right;
+        padding: 0 2rem 0 1rem;
+        background: rgba(17, 17, 17, 0.35);
+    }
+    header .title:after {
+        content: "";
+        position: absolute;
+        right: 100%;
+        width: 0;
+        height: 0;
+        border-left: 1rem solid transparent;
+        border-bottom: 3rem solid rgba(17, 17, 17, 0.2);
+    }
+    header .title:before {
+        content: "";
+        position: absolute;
+        right: 100%;
+        width: 0;
+        height: 0;
+        border-left: 1rem solid transparent;
+        border-bottom: 3rem solid rgba(25, 25, 25, 0.2);
+        border-right: 2rem solid rgba(25, 25, 25, 0.2);
+    }
+    .content-wrapper {
+        width: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        top: calc(54%);
+    }
+    .content-wrapper .section {
+        position: relative;
+        height: 2rem;
+        margin-bottom: 1rem;
+        clear: both;
+    }
+    .content-wrapper .section label {
+        float: left;
+        height: 2rem;
+        line-height: 2rem;
+    }
+    .content-wrapper .section input[type="checkbox"],
+    .content-wrapper .section select {
+        float: right;
+    }
+    .content-wrapper .section input[type="checkbox"] {
+        display: none;
+    }
+    .content-wrapper .section input[type="checkbox"] {
+        display: inline-block;
+        width: 1.2rem;
+        height: 2rem;
+        vertical-align: middle;
+        background: red;
+        cursor: pointer;
+    }
+    .content-wrapper .section select {
+        height: 2rem;
+        padding: 0 1rem;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    @-webkit-keyframes spin {
+        from {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        to {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+    @keyframes spin {
+        from {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        to {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+    @-webkit-keyframes coolgrad {
+        0% {
+            background-position: 0% 75%;
+        }
+        50% {
+            background-position: 100% 26%;
+        }
+        100% {
+            background-position: 0% 75%;
+        }
+    }
+    @keyframes coolgrad {
+        0% {
+            background-position: 0% 75%;
+        }
+        50% {
+            background-position: 100% 26%;
+        }
+        100% {
+            background-position: 0% 75%;
+        }
+    }
+
+    .checkmark-circle {
+        width: 150px;
+        height: 150px;
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+    }
+    .checkmark-circle .background {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: #2EB150;
+        position: absolute;
+    }
+    .checkmark-circle .checkmark {
+        border-radius: 5px;
+    }
+    .checkmark-circle .checkmark.draw:after {
+        -webkit-animation-delay: 100ms;
+        -moz-animation-delay: 100ms;
+        animation-delay: 100ms;
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-timing-function: ease;
+        -moz-animation-timing-function: ease;
+        animation-timing-function: ease;
+        -webkit-animation-name: checkmark;
+        -moz-animation-name: checkmark;
+        animation-name: checkmark;
+        -webkit-transform: scaleX(-1) rotate(135deg);
+        -moz-transform: scaleX(-1) rotate(135deg);
+        -ms-transform: scaleX(-1) rotate(135deg);
+        -o-transform: scaleX(-1) rotate(135deg);
+        transform: scaleX(-1) rotate(135deg);
+        -webkit-animation-fill-mode: forwards;
+        -moz-animation-fill-mode: forwards;
+        animation-fill-mode: forwards;
+    }
+    .checkmark-circle .checkmark:after {
+        opacity: 1;
+        height: 75px;
+        width: 37.5px;
+        -webkit-transform-origin: left top;
+        -moz-transform-origin: left top;
+        -ms-transform-origin: left top;
+        -o-transform-origin: left top;
+        transform-origin: left top;
+        border-right: 15px solid white;
+        border-top: 15px solid white;
+        border-radius: 2.5px !important;
+        content: '';
+        left: 25px;
+        top: 75px;
+        position: absolute;
+    }
+
+    @-webkit-keyframes checkmark {
+        0% {
+            height: 0;
+            width: 0;
+            opacity: 1;
+        }
+        20% {
+            height: 0;
+            width: 37.5px;
+            opacity: 1;
+        }
+        40% {
+            height: 75px;
+            width: 37.5px;
+            opacity: 1;
+        }
+        100% {
+            height: 75px;
+            width: 37.5px;
+            opacity: 1;
+        }
+    }
+    @-moz-keyframes checkmark {
+        0% {
+            height: 0;
+            width: 0;
+            opacity: 1;
+        }
+        20% {
+            height: 0;
+            width: 37.5px;
+            opacity: 1;
+        }
+        40% {
+            height: 75px;
+            width: 37.5px;
+            opacity: 1;
+        }
+        100% {
+            height: 75px;
+            width: 37.5px;
+            opacity: 1;
+        }
+    }
+    @keyframes checkmark {
+        0% {
+            height: 0;
+            width: 0;
+            opacity: 1;
+        }
+        20% {
+            height: 0;
+            width: 37.5px;
+            opacity: 1;
+        }
+        40% {
+            height: 75px;
+            width: 37.5px;
+            opacity: 1;
+        }
+        100% {
+            height: 75px;
+            width: 37.5px;
+            opacity: 1;
+        }
+    }
+    .cfg_table tr{
+        border: 1px solid black;
+    }
+
+</style>
+
+
+</div>

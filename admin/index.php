@@ -26,20 +26,6 @@ $Plugins->do_action('index_init'); // Plugins
 <html>
 <head>
 <!--
-`::::-
--sssssssssssso: .ssss+                                                       `..ossssssss.
-/sssssssssssss/ .ssss+                                                     .sNMMMMMMMMMMMM
-/sssso-------.  .ssss+                                                     mMMMMdd/::::hdd
-/sssso          .ssss+    `..:++++++:.`     -+++:./++++.   ../++++++-`    sNMMMM.                `:::::::``     `:::- .::::::::-       .::::.     -::::::.      -::::` -:::`  ``::::::::
-/sssso```````   .ssss+    -ssssssssssso:    :ssssssssss- ./sssssssssso:`  -mMMMM+/``           //dMMMMMMMdh:   .mMMMmomMMMMNMMMd-     .yMMMm/  -/sNMMMMMMmo/.   hMMMMoyNMMM-`:hdMMMMMMMM`
-/sssssooooooo/  .ssss+    -+/:....-ossso-   :sssss+/-:/..osss+....:osss:`  omMMMMMmd++.      `+MMMMssssyMMMN/  -MMMMMMMdhNy+NMMMy`   `oMMMNo `:hMMNhssssmMMMy.  hMMMMMNNymN.yMMMMysssssm`
-/sssssooooooo+  .ssss+     ``.::::+sssss:   :ssss:     `+ssss/:::::ossss.   .oommMMMMMmo.    mMMMMy....-hMMMm  -MMMMMm+.`.``+MMMNo   /NMMNo` +NMMMs-....+mMMM/  hMMMMN/. .. dMMMMs..   .
-/sssso````````  .ssss+    ./ossssooossss:   :ssss-     :osssssssssssssss.      `.+odMMMMms   MMMMMmmmmmmNMMMN+ -MMMMm/      .yMMMd/ -hMMMs`  oMMMMNmmmmmmNMMM/  hMMMM/      /dMMMMNmso-.
-/sssso          .ssss+   :sss+--.``:ssss:   :ssss-      +ssss/----------`          `/dMMMMs  MMMMMdddddddddddy -MMMMh        :mMMMs`oMMMh-   oMMMMNdddddddddd:  hMMMM:       `/+ddMMMMNN-
-/sssso          .ssss+  -ssss+`  `-ossss:   :ssss-      :ssss:.     `..   ---        :MMMMM  MMMMN:````````:`` -MMMMh         +MMMmdNMMN+    oMMMMy.```````-.   hMMMM:      -`  ``:/NMMMN`
-/sssso          .ssss+  `:sssso++ossssss:   :ssss-       :ossss+++++oss.  dNNhhhh:yhhNMMMM:  :hMMMNhy:::/hhd   -MMMMh         `sMMMMMMm+     .yMMMMd+::::shm/   hMMMM:      dhh/::::NMMMM`
-:++++/          `++++:   `-+ossso+:/ssso-   :ssso.        `:++osssss++-   sNMMMMMMMMMMMMh-    `hhMMMMMMMMMMm   -MMMMh          `oMMMMMs       .ohmMMMMMMMMMd-   hMMMM:      dMMMMMMMMMMh:
-            `````  `````    `````             ``````       ...syyyyyy-..         .-yyyyys...    :yyyo           `.....`          `.+yyyyy/.`    .oyyy.      ..syyyyy-..
 
 
 
@@ -126,7 +112,7 @@ $(document).ready(function(){
 <section class="navigation">
   <div class="nav-container">
     <div class="brand">
-      <a href="#!"><img style="margin-left: -450px;margin-top: 12px;" src="../images/logo.png" border="0" /></a>
+      <a href="#!"><img style="margin-left: -450px;margin-top: -9px;width: 8%;" src="../images/logo.png" border="0" /></a>
     </div>
 <nav style="
     width: 112%;
@@ -140,7 +126,7 @@ $(document).ready(function(){
       <ul class="nav-dropdown">
         <li  onClick="javascript:mainpage('settings','');"><a style="margin-right: -52px;" href="#!"><img src="../images/icons/medium/edit.png" width="18" height="18" /><?php echo $lang['settings']; ?></a></li>
         <li  onClick="javascript:mainpage('games','');"><a style="margin-right: -52px;" href="#!"><img src="../images/icons/medium/template.png" width="18" height="18" /><?php echo $lang['game_setups']; ?></a></li>
-        <li  onClick="javascript:mainpage('cloudgames','');"><a style="margin-right: -52px;" href="#!"><img src="../images/icons/medium/cloud.png" width="18" height="18" /><?php echo $lang['cloud_games']; ?></a></li>
+<!--        <li  onClick="javascript:mainpage('cloudgames','');"><a style="margin-right: -52px;" href="#!"><img src="../images/icons/medium/cloud.png" width="18" height="18" />--><?php //echo $lang['cloud_games']; ?><!--</a></li>-->
         <li  onClick="javascript:mainpage('plugins','');"><a style="margin-right: -52px;" href="#!"><img src="../images/icons/medium/plugins.png" width="18" height="18" /><?php echo $lang['plugins']; ?></a></li>
       </ul>
     </li>
@@ -158,7 +144,7 @@ $(document).ready(function(){
       <li onClick="javascript:user_show_create();"><a href="#!"><img src="../images/icons/medium/accounts.png" width="18" height="18" /><?php echo $lang['add_user']; ?></a></li>
       <li onClick="javascript:mainpage('admins','');"><a href="#!"><img src="../images/icons/medium/accounts.png" width="18" height="18" /><?php echo $lang['list_admins']; ?></a></li>
       <li onClick="javascript:admin_show_create();"><a href="#!"><img src="../images/icons/medium/accounts.png" width="18" height="18" /><?php echo $lang['add_admin']; ?></a></li>
-      <li onClick="javascript:mainpage('subusers','');"><a href="#!"><img src="../images/icons/medium/accounts.png" width="18" height="18" /><?php echo $lang['add_admin']; ?></a></li>
+      <li onClick="javascript:mainpage('subusers','');"><a href="#!"><img src="../images/icons/medium/accounts.png" width="18" height="18" /><?php echo 'Add Subuser' ?></a></li>
     </ul></li>
     <li><a href="#!">Network Settings</a>
     <ul class="nav-dropdown">
@@ -173,7 +159,7 @@ $(document).ready(function(){
     </ul></li>
     <li><a href="#!"><?php echo $_SESSION['gpx_username']; ?></a>
     <ul class="nav-dropdown">
-      <li onClick="javascript:mainpage('settings','');"><a href="#!"><img src="../images/icons/medium/edit.png" width="18" height="18" />My Settings</a></li>
+      <li onClick="javascript:mainpage('viewadmin','')"><a href="#!"><img src="../images/icons/medium/edit.png" width="18" height="18" />My Settings</a></li>
       <li><a href="./logout.php"><img src="../images/icons/medium/accounts.png" width="18" height="18" />Logout</a></li>
     </ul></li>
   </ul>

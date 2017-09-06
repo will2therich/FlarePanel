@@ -1,10 +1,14 @@
 <?php
 require('checkallowed.php'); // Check logged-in
 ?>
-<div class="page_title">
-    <div class="page_title_icon"><img src="../images/icons/medium/servers.png" border="0" /></div>
-    <div class="page_title_text"><?php echo $lang['servers']; ?></div>
-</div>
+<link rel="stylesheet" href="mainstyles.css">
+<div class="container" style="color:white !important;font-size:15px;margin-top: 5%;">
+
+    <header>
+        <div class="fa fa-gear"></div>
+        <div class="title">Admin Dash - Add Server</div>
+    </header>
+
 
 <script language="javascript">
 $(document).ready(function(e) {
@@ -18,13 +22,13 @@ $(document).ready(function(e) {
 
 <div class="infobox" style="display:none;"></div>
 
-<div class="box">
-<div class="box_title" id="box_servers_title"><?php echo $lang['create_server']; ?></div>
-<div class="box_content" id="box_servers_content">
+<!--<div class="box">-->
+<!--<div class="box_title" id="box_servers_title">--><?php //echo $lang['create_server']; ?><!--</div>-->
+<!--<div class="box_content" id="box_servers_content">-->
 
 <div class="infobox" id="create_info" style="display:none;"></div>
 
-<table border="0" cellpadding="2" cellspacing="0" width="700" class="cfg_table" style="margin-top:20px;">
+<table border="0" style="margin-top:20px;margin-left: 331px;" cellpadding="2" cellspacing="0" width="700" class="cfg_table" style="margin-top:20px;">
 <tr>
   <td><b><?php echo $lang['network']; ?>:</b></td>
   <td>
@@ -120,8 +124,13 @@ $(document).ready(function(e) {
 </table>
 
 <div align="center">
-  <div class="button" onClick="javascript:server_create();"><?php echo $lang['create_sv']; ?></div>
+  <div class="btn btn-default waves-effect waves-light" style="width: 23%" onClick="javascript:server_create();"><?php echo $lang['create_sv']; ?></div>
 </div>
 
 
-</div></div>
+</div>
+
+<style media="screen">
+
+
+</style>

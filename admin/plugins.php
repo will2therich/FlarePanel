@@ -1,19 +1,21 @@
 <?php
 require('checkallowed.php'); // Check logged-in
 ?>
+<link rel="stylesheet" href="mainstyles.css">
+<div class="container" style="color:white !important;font-size:15px;margin-top: 5%;">
 
-<div class="page_title">
-    <div class="page_title_icon"><img src="../images/icons/medium/plugins.png" border="0" /></div>
-    <div class="page_title_text"><?php echo $lang['plugins']; ?></div>
-</div>
+    <header>
+        <div class="fa fa-gear"></div>
+        <div class="title">Admin Dash - Plugins</div>
+    </header>
+
 
 <div class="infobox" style="display:none;"></div>
 
 <?php $Plugins->do_action('plugins_top'); // Plugins ?>
 
-<div class="box">
-<div class="box_title" id="box_servers_title"><?php echo $lang['plugins']; ?></div>
-<div class="box_content" id="box_servers_content">
+    <table border="0" style="margin-top:20px;margin-left: 331px;" cellpadding="2" cellspacing="0" width="700" class="cfg_table" style="margin-top:20px;">
+
 
 <table border="0" cellpadding="0" cellspacing="0" align="center" width="800" class="box_table" id="plugins_table" style="text-align:left;">
   <tr>
@@ -133,7 +135,7 @@ if($handle = opendir(DOCROOT.'/plugins'))
 ?>
 </table>
 
-</div>
+<!--</div>-->
 </div>
 
 <?php $Plugins->do_action('plugins_bottom'); // Plugins ?>

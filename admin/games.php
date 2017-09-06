@@ -2,16 +2,18 @@
 require('checkallowed.php'); // Check logged-in
 ?>
 
-<div class="page_title">
-    <div class="page_title_icon"><img src="../images/icons/medium/template.png" border="0" /></div>
-    <div class="page_title_text"><?php echo $lang['game_setups']; ?></div>
-</div>
+<link rel="stylesheet" href="mainstyles.css">
+<div class="container" style="color:white !important;font-size:15px;margin-top: 2%;height: 75%">
+
+    <header>
+        <div class="fa fa-gear"></div>
+        <div class="title">Admin Dash - Manage Games</div>
+    </header>
 
 <?php $Plugins->do_action('games_top'); // Plugins ?>
 
-<div class="box">
-<div class="box_title" id="box_servers_title"><?php echo $lang['game_setups']; ?></div>
-<div class="box_content" id="box_servers_content">
+<!--<div class="box_title" id="box_servers_title">--><?php //echo $lang['game_setups']; ?><!--</div>-->
+<!--<div class="box_content" id="box_servers_content">-->
 
 <table border="0" cellpadding="0" cellspacing="0" align="center" width="900" class="box_table" style="text-align:left;">
   <tr>
@@ -82,10 +84,10 @@ while($row_def  = $result_def->fetch_array())
 ?>
 </table>
 
-</div>
-</div>
+
 
 <span onClick="javascript:mainpage('gamesadd','');" class="links" style="display:block;"><img src="../images/icons/medium/add.png" border="0" width="28" height="28" /> <?php echo $lang['add']; ?></span>
 <span class="links" onClick="javascript:template_show_create(<?php echo $url_id; ?>);" style="display:block;"><img src="../images/icons/medium/add.png" border="0" width="28" height="28" /> <?php echo $lang['create_tp']; ?></span>
+</div>
 
 <?php $Plugins->do_action('games_bottom'); // Plugins ?>

@@ -9,7 +9,7 @@ require(DOCROOT.'/lang.php');
 // Check Install
 if(file_exists('install')) die('Currently down for maintenance.  Please try again soon.');
 
-include("../../configuration.php");
+include("./configuration.php");
 $conn = mysqli_connect($settings['db_host'],$settings['db_username'],$settings['db_password'],$settings['db_name']);
   $MaintCheck = mysqli_query($conn,"SELECT
     config_value

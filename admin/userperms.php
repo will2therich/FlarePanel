@@ -1,3 +1,12 @@
+<link rel="stylesheet" href="mainstyles.css">
+
+<div class="container" style="color:white !important;font-size:15px;margin-top: 2%;height: 75%">
+
+    <header>
+        <div class="fa fa-gear"></div>
+        <div class="title">Admin Dash - Manage User Permissions</div>
+    </header>
+    <div class="center" style="margin-left: 28%;">
 <?php
 require('checkallowed.php'); // Check logged-in
 
@@ -55,7 +64,9 @@ include(DOCROOT.'/ajax/user_tabs.php');
   <td><input type="radio" value="1" name="perm_chpass" id="perm_chpass_1" <?php if($perm_chpass) echo 'checked '; ?>/><label for="perm_chpass_1"> <?php echo $lang['yes']; ?> </label><input type="radio" value="0" name="perm_chpass" id="perm_chpass_2" <?php if(!$perm_chpass) echo 'checked '; ?>/><label for="perm_chpass_2"> <?php echo $lang['no']; ?></label> </td>
 </tr>
 </table>
-
+    </div>
 <div align="center">
   <div class="button" onClick="javascript:user_perm_save(<?php echo $url_id; ?>);"><?php echo $lang['save']; ?></div>
 </div>
+</div>
+

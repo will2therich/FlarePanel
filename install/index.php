@@ -21,11 +21,12 @@ if(file_exists(DOCROOT.'/configuration.php'))
     }
     
 }
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-<title>GamePanelX Installation</title>
+<title>FlarePanel Installation</title>
 <link rel="stylesheet" type="text/css" href="../themes/default/index.css" />
 <script type="text/javascript" src="../scripts/jquery.min.js"></script>
 <script type="text/javascript">var ajaxURL='../ajax/ajax.php';</script>
@@ -91,7 +92,7 @@ if(file_exists(DOCROOT.'/configuration.php'))
 </tr>
 <tr>
   <td><b>Database Name:</b></td>
-  <td><input type="text" id="db_name" value="gpx" class="inputs" /></td>
+  <td><input type="text" id="db_name" value="" class="inputs" /></td>
 </tr>
 <tr>
   <td><b>Database Username:</b></td>
