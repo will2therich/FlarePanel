@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `admins` (
   `email_address` varchar(255) NOT NULL,
   `first_name` varchar(128) NOT NULL,
   `last_name` varchar(128) NOT NULL,
-  `p_salt` varchar(128) NOT NULL,
+  `psalt` varchar(128) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `username` (`username`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
