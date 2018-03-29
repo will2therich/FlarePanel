@@ -1,5 +1,7 @@
 FlarePanel!
 
+PLEASE GOTO THE FOLLOWING BRANCH: - https://github.com/will2therich/GamePanelX-V3
+
 Current Version: 0.58
 
 Flarepanel is a Gamepanel that is being built on the base of GamePanelX-V3 by Ryan Gehrig See the information below.
